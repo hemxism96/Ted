@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>TED Talks</h1>
+    <div>
+        <p>If it succeed to connect with db u can see them</p>
+        <p>------------------------------------</p>
+        {% for video in videos %}
+            <p>url: {{video.url}}</p>
+            <p>title: {{video.title}}</p>
+            <p>keywords: {{video.keywords}}</p>
+            <p>author: {{video.author}}</p>
+            <p>description: {{video.description}}</p>
+            <p>uploadDate: {{video.uploadDate}}</p>
+            <p>views: {{video.views}}</p>
+            <p>duration: {{video.duration}}</p>
+            <p>languages: {{video.languages}}</p>
+            <img src= {{video.thumbnail}}>
+            <p>---------------</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
