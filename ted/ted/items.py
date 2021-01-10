@@ -8,6 +8,7 @@ import scrapy
 class TedItem(scrapy.Item):
     # define the fields for your item here like:
 
+    con_type = scrapy.Field()    
     url = scrapy.Field()    
     title= scrapy.Field()   
     keywords= scrapy.Field()   
@@ -21,10 +22,11 @@ class TedItem(scrapy.Item):
 
 class VocalItem(scrapy.Item):
 
+    con_type = scrapy.Field()
     url = scrapy.Field()
     title = scrapy.Field()
     keywords = scrapy.Field()
     author = scrapy.Field()
     description= scrapy.Field()
     uploadDate = scrapy.Field()
-    image = scrapy.Field()
+    thumbnail = scrapy.Field()

@@ -2,17 +2,17 @@
 {% block content %}
 <div class="jumbotron">
     <h1>Ted Videos</h1>
-    <p class="slogan">Find various Ted videos !</p>
+    <p class="slogan">Find various Vocal articles !</p>
 </div>
 
 <div class="row">
     {% for res in res['hits']['hits'] %}
     <div class="col-md-4">
-        <h4 id="title">{{res['_source']['title']}}</h4><p>{{res['_source']['duration']}}</p> <p>{{res['_source']['uploadDate']}}</p>
+        <h4 id="title">{{res['_source']['title']}}</h4><p>{{res['_source']['author']}}</p> <p>{{res['_source']['uploadDate']}}</p>
         <p>
             <img src="{{res['_source']['thumbnail']}}" width="400" />
         </p>
-        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video &raquo;</a></p>
+        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Read the article &raquo;</a></p>
     </div>
     {% endfor %}
 </div>

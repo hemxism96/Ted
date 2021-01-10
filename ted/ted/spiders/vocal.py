@@ -54,13 +54,14 @@ class VocalSpider(scrapy.Spider):
     def parse_article(self,response):
 
         article = VocalItem(
+            con_type="vocal",
             url=response.url,
             title= response.css("meta[property='og:title']::attr(content)").extract_first(),
             keywords= self.organize_keywords(response),
             author= response.css(".css-1ndema5-Text::text").extract_first(),
             description= response.css("meta[name='description']::attr(content)").extract_first(),
             uploadDate = self.change_to_datetime(response),
-            image = response.css("meta[property='og:image']::attr(content)").extract_first()
+            thumbnail = response.css("meta[property='og:image']::attr(content)").extract_first()
 
 
         )

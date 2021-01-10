@@ -1,0 +1,41 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div style="background:transparent !important" class="jumbotron">
+    <p>
+      <center>
+      <img src="https://pa.tedcdn.com/favicon.ico" style="width:80px;">
+      </center>
+    </p>
+    <p>
+        <center>
+        <font size="10">Search Ted video</font>
+        </center>
+    </p>
+  </div>
+
+  <form action="/search/results" method="post">
+    <div class="input-group">
+      <input type="text" class="form-control input-lg" name="input" placeholder="Search" autofocus>
+      <div class="input-group-btn">
+        <button class="btn btn-primary btn-lg" type="submit">
+          Search
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <br><br>
+    <footer class="footer">
+      <p>&copy; 2020 Suyeon & Neil </p>
+    </footer>
+
+    </div>
+  </div>
+
+  
+  
+{% endblock %}

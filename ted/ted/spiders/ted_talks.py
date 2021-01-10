@@ -50,6 +50,7 @@ class TedTalksSpider(scrapy.Spider):
     def parse_video(self,response):
 
         video = TedItem(
+            con_type="ted",
             url=response.url,
             title= response.css("meta[property='og:title']::attr(content)").extract_first(),
             keywords= self.organize_keywords(response),

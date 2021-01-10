@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+
+  <div class="starter-template" >
+    <h1>Project Data Engineering</h1>
+    <p class="lead">Search lots of Ted video using ElasticSearch.</p>
+    <form action="/search/results" method="post">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-3 col-md-3 col-lg-3">&nbsp;</div>
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <input type="text" class="form-control input-lg" name="search" id="search" placeholder="Enter Search Text..." value="{{ term }}">
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3">&nbsp;</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <h2>Total Contents: {{res_ted['hits']['total']+res_vocal['hits']['total']}}</h2>
+
+  <div class="row" style="margin-top:30px;">
+    <div class="col-md-6 left">
+      <h2> Ted Video </h2>
+      <p></p>
+      {% for res in res_ted['hits']['hits'] %}
+        <h4 id="title">{{res['_source']['title']}}</h4>
+        <p>{{res['_source']['author']}}</p>
+        <p>{{res['_source']['description']}}</p>
+        <p>{{res['_source']['views']}}</p>
+        <p>{{res['_source']['duration']}}</p> 
+        <p>{{res['_source']['uploadDate']}}</p>
+        <p>
+          <img src="{{res['_source']['thumbnail']}}" width="500" />
+        </p>
+        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video &raquo;</a></p>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-6 right">
+      <h2> Vocal Article </h2>
+      <p></p>
+      {% for res in res_vocal['hits']['hits'] %}
+        <h4 id="title">{{res['_source']['title']}}</h4>
+        <p>{{res['_source']['author']}}</p>
+        <p>{{res['_source']['description']}}</p>
+        <p>{{res['_source']['uploadDate']}}</p>
+        <p>
+          <img src="{{res['_source']['thumbnail']}}" width="500" />
+        </p>
+        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Read the article &raquo;</a></p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
