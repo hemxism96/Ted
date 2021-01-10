@@ -18,4 +18,13 @@ class TedItem(scrapy.Item):
     duration = scrapy.Field()
     languages = scrapy.Field()
     thumbnail = scrapy.Field()
-    
+
+class VocalItem(scrapy.Item):
+
+    url = scrapy.Field()
+    title = scrapy.Field()
+    keywords = scrapy.Field()
+    author = scrapy.Field()
+    description= scrapy.Field()
+    uploadDate = scrapy.Field()
+    image = scrapy.Field()
