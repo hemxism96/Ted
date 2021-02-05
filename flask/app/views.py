@@ -2,14 +2,17 @@
 #This will tell Flask what to display on which path.
 
 from app import app,db
-from flask import render_template,request
+from flask import render_template,request, flash, redirect,url_for
 from elasticsearch import Elasticsearch, helpers
 
 es= Elasticsearch()
+
 es.indices.delete(index='ted', ignore=[400, 404])
+es.indices.delete(index='vocal', ignore=[400, 404])
 
 num1=1
 num2=1
+
 for content in db.find():
     content.pop('_id')
     if content['con_type']=='ted':
@@ -23,7 +26,31 @@ es.indices.refresh(index="vocal")
 
 @app.route('/')
 def hello():
-    return render_template('main.html')
+    res_t=es.search(
+        index='ted',
+        body={
+            "size": 20,
+            "query": {
+                "match_all": {}
+            },
+            "sort":[
+	            {"views" : {"order": "desc"}}
+            ]
+        }
+    )
+    res_v=es.search(
+        index='vocal',
+        body={
+            "size": 20,
+            "query": {
+                "match_all": {}
+            },
+            "sort":[
+	            {"uploadDate" : {"order": "desc"}}
+            ]
+        }
+    )
+    return render_template('main.html',res_t=res_t,res_v=res_v)
 
 @app.route('/ted_videos',methods=['GET', 'POST'])
 def ted_videos():

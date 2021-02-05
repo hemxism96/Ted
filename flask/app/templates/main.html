@@ -2,9 +2,65 @@
 
 {% block content %}
 
-<div class="container-fluid">
-    <h3>TED TALKS</h3>
-    <p>Welcome to the ted world !</p>
+<div class="hero-image" style="margin-top:150px">
+  <div class="hero-text">
+    <h1 style="font-size:50px; color:black">Explore New World</h1>
+    <p style="color:black">We find ted videos and vocal articles quickly depends on your interests</p>
   </div>
-  
+</div>
+
+<!-- Swiper -->
+<div class="swiper-container ted" style="margin-top:300px">
+  <ul style="background-color: silver; font-size: 30px;">Popular Ted Talks</ul>
+  <div class="swiper-wrapper">
+    {% for res in res_t['hits']['hits'] %}
+    <div class="swiper-slide">
+      <img src="{{res['_source']['thumbnail']}}" width="270" height="180"/>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+  <!-- Add Arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
+<div class="swiper-container vocal" style="margin-top:70px">
+  <ul style="background-color: silver; font-size: 30px;" >Newest Vocal Stories</ul>
+  <div class="swiper-wrapper">
+    {% for res in res_v['hits']['hits'] %}
+      <div class="swiper-slide">
+        <img src="{{res['_source']['thumbnail']}}" width="270" height="180"/>
+      </div>
+    {% endfor %}
+  </div>
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+  <!-- Add Arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+
 {% endblock %}

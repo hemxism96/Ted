@@ -4,21 +4,33 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/swiper-bundle.min.js') }}"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="{{ url_for('static', filename='css/font.css') }}" rel="stylesheet">
+  <style type="text/css">body{font-family: 'Oswald', sans-serif;}</style>
 </head>
+
 <body>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- Brand/logo -->
+
   <a class="navbar-brand" href="/">
-    <img src="https://pa.tedcdn.com/favicon.ico" alt="logo" style="width:40px;">
+    <img src="{{url_for('static', filename='image/logo.png')}}" alt="logo" style="width:100px;">
   </a>
   
   <!-- Links -->
   <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="/ted_videos">Ted Video</a>
     </li>

@@ -1,6 +1,5 @@
 import scrapy
 import re
-
 from ted.items import TedItem
 from ted.mongo_provider import MongoProvider
 from datetime import datetime
@@ -26,7 +25,7 @@ class TedTalksSpider(scrapy.Spider):
         self.mongo_provider=MongoProvider(mongo_uri,mongo_database)
         self.collection=self.mongo_provider.get_collection()
         last_items=self.collection.find().sort('uploadDate',-1).limit(1)
-        self.last_scraped_url=last_items[0]['url'] if last_items.count() else None
+        self.last_scraped_url=None
 
     def parse(self, response):
         for video in response.css('.ga-link'):  #in ga-link there is an url of video
@@ -57,7 +56,7 @@ class TedTalksSpider(scrapy.Spider):
             author= response.css("meta[name='author']::attr(content)").extract_first(),
             description= response.css("meta[name='description']::attr(content)").extract_first(),
             uploadDate = self.change_to_datetime(response),
-            views=response.css("meta[itemprop='interactionCount']::attr(content)").extract_first(),
+            views=int(response.css("meta[itemprop='interactionCount']::attr(content)").extract_first()),
             duration= self.clean_duration(response),
             languages= self.possible_languages(response),
             thumbnail= self.get_thumbnail(response)

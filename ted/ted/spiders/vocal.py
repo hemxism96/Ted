@@ -2,16 +2,12 @@ import scrapy
 import re
 from datetime import datetime
 from ted.mongo_provider import MongoProvider
-from ted.items import TedItem, VocalItem
+from ted.items import VocalItem
 
 class VocalSpider(scrapy.Spider):
     name = 'vocal'
     allowed_domains = ['vocal.media']
-    start_urls = ['https://vocal.media/']
-
-    # def start_requests(self):
-    #     for i in range(137):
-    #         yield self.make_requests_from_url("https://www.ted.com/talks?page=%d" % i)
+    start_urls = ['https://vocal.media/top-stories']
 
     @classmethod
     def from_crawler(cls,crawler, *args, **kwargs):
@@ -29,10 +25,10 @@ class VocalSpider(scrapy.Spider):
         self.mongo_provider=MongoProvider(mongo_uri,mongo_database)
         self.collection=self.mongo_provider.get_collection()
         last_items=self.collection.find().sort('uploadDate',-1).limit(1)
-        self.last_scraped_url=last_items[0]['url'] if last_items.count() else None
+        self.last_scraped_url=None
 
     def parse(self, response):
-        for article in response.css('.css-1ezxvls-SiteLink-PostTile'):
+        for article in response.css('.css-1k97l7v-SiteLink-PostTile'):
 
             url = 'https://vocal.media'+''.join(article.css('::attr(href)').extract())
             print(url)
@@ -46,7 +42,7 @@ class VocalSpider(scrapy.Spider):
 
         if response.css('.css-lx9tbs-SiteLink'):
             next_page_url="https://vocal.media"+"".join(response.css('.css-lx9tbs-SiteLink::attr(href)')[-3].extract())
-            match=re.match(r".*\/\?page\=(\d+)",next_page_url)
+            match=re.match(r".*\/top-stories\?.*\=(\d+)",next_page_url)
             next_page_number = int(match.groups()[0])
             if next_page_number <= self.limit_pages:
                 yield scrapy.Request(next_page_url)
@@ -62,8 +58,6 @@ class VocalSpider(scrapy.Spider):
             description= response.css("meta[name='description']::attr(content)").extract_first(),
             uploadDate = self.change_to_datetime(response),
             thumbnail = response.css("meta[property='og:image']::attr(content)").extract_first()
-
-
         )
 
         yield(article)

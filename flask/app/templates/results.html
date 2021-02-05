@@ -2,16 +2,21 @@
 {% block content %}
 
 <div class="container">
-
-  <div class="starter-template" >
+  
+  <div class="starter-template" style="margin-top: 50px;">
     <h1>Project Data Engineering</h1>
-    <p class="lead">Search lots of Ted video using ElasticSearch.</p>
+    <p class="lead">Search lots of Ted video & vocal articles using ElasticSearch</p>
     <form action="/search/results" method="post">
       <div class="form-group">
         <div class="row">
-          <div class="col-xs-3 col-md-3 col-lg-3">&nbsp;</div>
-          <div class="col-xs-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control input-lg" name="search" id="search" placeholder="Enter Search Text..." value="{{ term }}">
+          <div class="col-md-3">&nbsp;</div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" name="input" id="search" placeholder="Enter Search Text..." value="{{ term }}">
+            <div class="input-group-btn">
+              <button class="btn btn-danger" type="submit">
+                Search
+              </button>
+            </div>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3">&nbsp;</div>
         </div>
@@ -19,23 +24,22 @@
     </form>
   </div>
 
-  <h2>Total Contents: {{res_ted['hits']['total']+res_vocal['hits']['total']}}</h2>
 
-  <div class="row" style="margin-top:30px;">
+  <div class="row" style="margin-top:100px;">
     <div class="col-md-6 left">
       <h2> Ted Video </h2>
       <p></p>
       {% for res in res_ted['hits']['hits'] %}
-        <h4 id="title">{{res['_source']['title']}}</h4>
-        <p>{{res['_source']['author']}}</p>
-        <p>{{res['_source']['description']}}</p>
-        <p>{{res['_source']['views']}}</p>
-        <p>{{res['_source']['duration']}}</p> 
-        <p>{{res['_source']['uploadDate']}}</p>
-        <p>
-          <img src="{{res['_source']['thumbnail']}}" width="500" />
-        </p>
-        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video &raquo;</a></p>
+        <ul class="list-group ted_videos" style="margin-bottom: 10px;">
+          <li class="list-group-item"><p style="font-size: 20px;"><b>{{res['_source']['title']}}</b></p></li>
+          <li class="list-group-item">{{res['_source']['author']}}</li>
+          <li class="list-group-item">{{res['_source']['description']}}</li>
+          <li class="list-group-item">Views: {{res['_source']['views']}}</li>
+          <li class="list-group-item">Duration: {{res['_source']['duration']}}</li>
+          <li class="list-group-item">Upload Date: {{res['_source']['uploadDate']}}</li>
+          <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="500" /></li>
+          <li class="list-group-item"><p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video! 🖥&raquo;</a></p></li>
+        </ul>
       {% endfor %}
     </div>
 
@@ -43,14 +47,14 @@
       <h2> Vocal Article </h2>
       <p></p>
       {% for res in res_vocal['hits']['hits'] %}
-        <h4 id="title">{{res['_source']['title']}}</h4>
-        <p>{{res['_source']['author']}}</p>
-        <p>{{res['_source']['description']}}</p>
-        <p>{{res['_source']['uploadDate']}}</p>
-        <p>
-          <img src="{{res['_source']['thumbnail']}}" width="500" />
-        </p>
-        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Read the article &raquo;</a></p>
+        <ul class="list-group vocal_articles" style="margin-bottom: 10px;">
+          <li class="list-group-item"><p style="font-size: 20px;"><b>{{res['_source']['title']}}</b></p></li>
+          <li class="list-group-item">{{res['_source']['author']}}</li>
+          <li class="list-group-item">{{res['_source']['description']}}</li>
+          <li class="list-group-item">Upload Date: {{res['_source']['uploadDate']}}</li>
+          <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="500" /></li>
+          <li class="list-group-item"><p><a class="btn btn-default" href="{{res['_source']['url']}}">Read the article! 📝&raquo;</a></p></li>
+        </ul>
       {% endfor %}
     </div>
   </div>

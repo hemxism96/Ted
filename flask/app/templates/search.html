@@ -3,25 +3,20 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container" style="margin-top:100px;">
   <div style="background:transparent !important" class="jumbotron">
     <p>
       <center>
-      <img src="https://pa.tedcdn.com/favicon.ico" style="width:80px;">
+        <img src="{{url_for('static', filename='image/logo.png')}}" style="width:400px;">
       </center>
-    </p>
-    <p>
-        <center>
-        <font size="10">Search Ted video</font>
-        </center>
     </p>
   </div>
 
   <form action="/search/results" method="post">
     <div class="input-group">
-      <input type="text" class="form-control input-lg" name="input" placeholder="Search" autofocus>
+      <input type="text" class="form-control" name="input" placeholder="Search" autofocus>
       <div class="input-group-btn">
-        <button class="btn btn-primary btn-lg" type="submit">
+        <button class="btn btn-danger" type="submit">
           Search
         </button>
       </div>

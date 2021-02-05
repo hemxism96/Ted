@@ -5,14 +5,16 @@
     <p class="slogan">Find various Ted videos !</p>
 </div>
 
-<div class="row">
+<div class="row" style="margin-left: 50px; margin-right: 50px;">
     {% for res in res['hits']['hits'] %}
     <div class="col-md-4">
-        <h4 id="title">{{res['_source']['title']}}</h4><p>{{res['_source']['duration']}}</p> <p>{{res['_source']['uploadDate']}}</p>
-        <p>
-            <img src="{{res['_source']['thumbnail']}}" width="400" />
-        </p>
-        <p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video &raquo;</a></p>
+        <ul class="list-group ted_videos" style="margin-bottom: 10px;">
+            <li class="list-group-item"><p style="font-size: 20px;"><b>{{res['_source']['title']}}</b></p></li>
+            <li class="list-group-item">Duration: {{res['_source']['duration']}}</li>
+            <li class="list-group-item">Upload Date: {{res['_source']['uploadDate']}}</li>
+            <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="370" /></li>
+            <li class="list-group-item"><p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video! 🖥&raquo;</a></p></li>
+        </ul>
     </div>
     {% endfor %}
 </div>
