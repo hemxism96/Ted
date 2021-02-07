@@ -66,6 +66,6 @@ Now hit localhost:5000 and you can see the application running.
 Distributed under the MIT License.
   
 ## Author
-👩🏻‍🏫 Suyeon CHO
+👩🏻‍💻 Suyeon CHO
 
-🧑🏾‍🏫 Neil-Matthieu RAMANOELINA
+🧑🏾‍💻 Neil-Matthieu RAMANOELINA
