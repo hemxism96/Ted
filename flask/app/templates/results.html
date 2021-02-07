@@ -1,17 +1,16 @@
 {% extends 'index.html' %}
 {% block content %}
 
-<div class="container">
+<div class="container" style="margin-left: 500px;">
   
   <div class="starter-template" style="margin-top: 50px;">
-    <h1>Project Data Engineering</h1>
-    <p class="lead">Search lots of Ted video & vocal articles using ElasticSearch</p>
+    <h1>Thanks to ElasticSearch, we can find relative results ! </h1>
     <form action="/search/results" method="post">
       <div class="form-group">
         <div class="row">
           <div class="col-md-3">&nbsp;</div>
-          <div class="col-md-6">
-            <input type="text" class="form-control" name="input" id="search" placeholder="Enter Search Text..." value="{{ term }}">
+          <div class="col-md-6"></div>
+            <input type="text" style="width: 70%;" name="input" id="search" placeholder="Enter Search Text..." value="{{ term }}">
             <div class="input-group-btn">
               <button class="btn btn-danger" type="submit">
                 Search
@@ -24,8 +23,7 @@
     </form>
   </div>
 
-
-  <div class="row" style="margin-top:100px;">
+  <div class="row" style="margin-top:100px; margin-right: 80px; margin-left: 80px;">
     <div class="col-md-6 left">
       <h2> Ted Video </h2>
       <p></p>
@@ -37,7 +35,7 @@
           <li class="list-group-item">Views: {{res['_source']['views']}}</li>
           <li class="list-group-item">Duration: {{res['_source']['duration']}}</li>
           <li class="list-group-item">Upload Date: {{res['_source']['uploadDate']}}</li>
-          <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="500" /></li>
+          <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="500"/></li>
           <li class="list-group-item"><p><a class="btn btn-default" href="{{res['_source']['url']}}">Watch the video! 🖥&raquo;</a></p></li>
         </ul>
       {% endfor %}
@@ -52,7 +50,7 @@
           <li class="list-group-item">{{res['_source']['author']}}</li>
           <li class="list-group-item">{{res['_source']['description']}}</li>
           <li class="list-group-item">Upload Date: {{res['_source']['uploadDate']}}</li>
-          <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="500" /></li>
+          <li class="list-group-item"><img src="{{res['_source']['thumbnail']}}" width="500"/></li>
           <li class="list-group-item"><p><a class="btn btn-default" href="{{res['_source']['url']}}">Read the article! 📝&raquo;</a></p></li>
         </ul>
       {% endfor %}

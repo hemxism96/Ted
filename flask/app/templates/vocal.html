@@ -1,9 +1,53 @@
 {% extends 'index.html' %}
 {% block content %}
 <div class="jumbotron">
-    <h1>Vocal Articles</h1>
-    <p class="slogan">Find various Vocal articles !</p>
+    <h1 style="margin-left: 50px;">Vocal Articles</h1>
+    <p class="slogan" style="margin-left: 50px;">Find various Vocal articles !</p>
 </div>
+
+<div id="myBtnContainer" style="margin-left: 70px; margin-right: 70px; margin-bottom: 30px;">
+    <form action="/vocal_articles/filter" method="post">
+        <div id="btn_group">
+            <button type="text" name="input" id="search"  value="wander"> Adventure </button>
+            <button type="text" name="input" id="search"  value="petlife"> Animals </button>
+            <button type="text" name="input" id="search"  value="blush"> Beauty </button>
+            <button type="text" name="input" id="search"  value="trader"> Business </button>
+            <button type="text" name="input" id="search"  value="wheel"> Cars </button>
+            <button type="text" name="input" id="search"  value="criminal"> Criminal </button>
+            <button type="text" name="input" id="search"  value="chain"> Cryptocurrency </button>
+            <button type="text" name="input" id="search"  value="proof"> Drink </button>
+            <button type="text" name="input" id="search"  value="education"> Education </button>
+            <button type="text" name="input" id="search"  value="families"> Families </button>
+            <button type="text" name="input" id="search"  value="styled"> Fashion </button>
+            <button type="text" name="input" id="search"  value="feast"> Food </button>
+            <button type="text" name="input" id="search"  value="futurism"> Futurism </button>
+            <button type="text" name="input" id="search"  value="gamers"> Gaming </button>
+            <button type="text" name="input" id="search"  value="longevitiy"> Health </button>
+            <button type="text" name="input" id="search"  value="horror"> Horror </button>
+            <button type="text" name="input" id="search"  value="lifehack"> Lifehack </button>
+            <button type="text" name="input" id="search"  value="marriage"> Marriage </button>
+            <button type="text" name="input" id="search"  value="psyche"> Mental Health </button>
+            <button type="text" name="input" id="search"  value="serve"> Military </button>
+            <button type="text" name="input" id="search"  value="motivation"> Motivation </button>
+            <button type="text" name="input" id="search"  value="beat"> Music </button>
+            <button type="text" name="input" id="search"  value="photography"> Photography </button>
+            <button type="text" name="input" id="search"  value="poets"> Poetry </button>
+            <button type="text" name="input" id="search"  value="swamp"> Politics </button>
+            <button type="text" name="input" id="search"  value="geeks"> Pop Culture </button>
+            <button type="text" name="input" id="search"  value="humans"> Relationship </button>
+            <button type="text" name="input" id="search"  value="filthy"> Sexuality </button>
+            <button type="text" name="input" id="search"  value="cleats"> Soccer </button>
+            <button type="text" name="input" id="search"  value="unbalanced"> Sports </button>
+            <button type="text" name="input" id="search"  value="01"> Tech&Social </button>
+            <button type="text" name="input" id="search"  value="potent"> Weed </button>
+            <button type="text" name="input" id="search"  value="viva"> Women </button>
+            <button type="text" name="input" id="search"  value="journal"> Work </button>
+        </div>
+    </form>
+  </div>
+
+  <style> #btn_group button{ border: 2px solid #140302; background-color: rgba(0,0,0,0); color: #140302; border-radius: 5px; padding: 10px; margin: 2px;} #btn_group button:hover{ color:white; background-color: #140302; } </style>
+
 
 <div class="row" style="margin-left: 50px; margin-right: 50px;">
     {% for res in res['hits']['hits'] %}

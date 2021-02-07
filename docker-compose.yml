@@ -9,7 +9,7 @@ services:
       - discovery.type=single-node
     ports:
       - "9200:9200"
-
+      
   mongo:
     image: mongo
     container_name: mongo
@@ -19,28 +19,4 @@ services:
     volumes:
       - ./data/mongo:/data/db
     ports:
-      - "27017:27017"
-
-  scrapy:
-    build:
-      dockerfile: scrapy.Dockerfile
-      context: .
-    container_name: scrapy
-    ports:
-      - "9000:9000"
-    links:
-      - mongo
-
-  app:
-    container_name: app
-    build: 
-      context: .
-      dockerfile: app.Dockerfile
-    ports:
-      - "5000:5000"
-    links:
-      - mongo
-      - elastic
-    depends_on: 
-      - scrapy
-  
+        - 27017:27017

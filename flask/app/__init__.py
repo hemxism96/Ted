@@ -15,8 +15,7 @@ app.config['SECRET_KEY']='ted'
 #app.config.from_object('config') #name of config file
 
 #database
-client=MongoClient(host='127.0.0.1',
-                     port=27017)
+client=MongoClient()
 db=client.ted.ted_videos
 
 #Load the views and models

@@ -3,10 +3,9 @@
 
 from app import app,db
 from flask import render_template,request, flash, redirect,url_for
-from elasticsearch import Elasticsearch, helpers
+from elasticsearch import Elasticsearch
 
 es= Elasticsearch()
-
 es.indices.delete(index='ted', ignore=[400, 404])
 es.indices.delete(index='vocal', ignore=[400, 404])
 
@@ -58,7 +57,7 @@ def ted_videos():
         index="ted",
         body={
             "from": 0,
-            "size": 100,
+            "size": 1000,
             "query": {
                 "match_all":{}
             }
@@ -66,19 +65,55 @@ def ted_videos():
     )
     return render_template('ted.html',res=res)
 
+@app.route('/ted_videos/filter',methods=['GET','POST'])
+def filter_ted():
+    search_term=request.form['input']
+    res=es.search(
+        index="ted",
+        body={
+            "from": 0,
+            "size": 1000,
+            "query": {
+                "multi_match" : { 
+                            "query": search_term, 
+                            "fields": ["languages"]
+                        }
+            }
+        }
+    )
+    return render_template('ted.html',res=res,term=search_term)
+
 @app.route('/vocal_articles',methods=['GET', 'POST'])
 def vocal_articles():
     res=es.search(
         index="vocal",
         body={
             "from": 0,
-            "size": 100,
+            "size": 1000,
             "query": {
                 "match_all":{}
             }
         }
     )
     return render_template('vocal.html',res=res)
+
+@app.route('/vocal_articles/filter',methods=['GET','POST'])
+def filter_vocal():
+    search_term=request.form['input']
+    res=es.search(
+        index="vocal",
+        body={
+            "from": 0,
+            "size": 1000,
+            "query": {
+                "multi_match" : { 
+                            "query": search_term, 
+                            "fields": ["url","title","keywords","author","description"]
+                        }
+            }
+        }
+    )
+    return render_template('vocal.html',res=res,term=search_term)
 
 @app.route('/search')
 def search():
@@ -119,11 +154,3 @@ def search_request():
     except:
         flash("ERROR: Can't find any ElasticSearch servers.")
         return redirect('/search')
-
-@app.route('/search/results/<uploadDate>',methods=['POST'])
-def search_detail():
-    con=es.search(
-            index="ted", 
-             body={"query": {"multi_match" : { "query": uploadDate, "fields": ["title","keywords","author","description"]}}}
-    )
-    return render_template('detail.html',content=con)
