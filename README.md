@@ -33,7 +33,7 @@ $ docker-compose up -d
 We recommend at least 100 pages per site.
 <pre>
 <code>
-$ cd scrapy cd scrapy && scrapy crawl ted_talks -a limited_pages={as much as you want} && scrapy crawl vocal -a limited_pages={as much as you want}
+$ cd scrapy && scrapy crawl ted_talks -a limited_pages={as much as you want} && scrapy crawl vocal -a limited_pages={as much as you want}
 </code>
 </pre>
 
