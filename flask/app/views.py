@@ -131,7 +131,7 @@ def search_request():
                     "query": {
                         "multi_match" : { 
                             "query": search_term, 
-                            "fields": ["title","keywords","author","description"]
+                            "fields": ["url","title","keywords","author","description"]
                         }
                     }
             }
@@ -144,7 +144,7 @@ def search_request():
                     "query": {
                         "multi_match" : { 
                             "query": search_term, 
-                            "fields": ["title","keywords","author","description"]
+                            "fields": ["url","title","keywords","author","description"]
                         }
                     }
             }
